@@ -52,6 +52,10 @@
         <img src="../static/01_lion.png" class="slides mainImg sl-active-color hide">
         <img src="../static/02_owl.png" class="slides mainImg sl-active-color hide">
         <img src="../static/03_fox.png" class="slides mainImg sl-active-color hide">
+
+        <img src="../static/04_tree1.png" class="slides mainImg sl-active-color hide">
+        <img src="../static/04_tree2.png" class="slides mainImg sl-active-color hide">
+        <img src="../static/04_tree3.png" class="slides mainImg sl-active-color hide">
         <img src="../static/init_mandala.png" id="frontImg" class="slides mainImg hide active">
 
 
@@ -72,19 +76,24 @@
     var items = item_list.getElementsByClassName("item");
     var allNum = slides.length;
     var slNum = slides.length - 1;
+    var halfNum = Math.floor(slNum / 2);
     var slider = 0;
     var index = 0;
     var actives = 0;
+    var idIindex = 0;
+    var id = 0;
 
     console.log("Slides: " + slNum + "; Selection Items: " + items.length);
 
 
     function start() {
+      id = Array.from(this.parentNode.children).indexOf(this) - 1;
       activeItem(this);
       stop();
       resetAll();
-      index = slNum;
-      swapClass(slides[slNum - 1], "active");
+      //index = id == 0 ? allNum : halfNum;
+      index = 0;
+      swapClass(slides[slNum], "active");
       slider = setInterval(next, 1000);
     }
 
@@ -98,13 +107,14 @@
         elem.remove(name);
       } else {
         elem.add(name);
+        console.log("Added Active: " + elem);
       }
     }
 
     //EventListeners
     for (var i = 0; i < items.length; i++) {
       items[i].addEventListener("click", start);
-      //items[i].addEventListener("click", activeItem);
+      //items[i].addEventListener("click", onClick);
       console.log("Added EventListener: " + i);
     }
     var btn = document.getElementById("stop");
@@ -121,10 +131,14 @@
     function next() {
       slide_list = document.getElementById("mainImg-wrap");
       slides = slide_list.getElementsByClassName("slides");
-      console.log("Active Slide: " + (index % slNum) + "; Pre Slide: " + ((index - 1) % slNum) + "; Index: " + index);
-
-      var pre = slides[(index - 1) % slNum];
-      var current = slides[index % slNum];
+      
+      if (id == 0) idIndex = 0;
+      else {
+        idIndex = halfNum;
+      }
+      var currIndex = (index % halfNum) + idIndex;
+      var current = slides[currIndex];
+      console.log("Active Slide: " + currIndex + "; Index: " + index);
       resetAll();
       swapClass(current, "active");
       index++;
@@ -138,6 +152,7 @@
     }
 
     function resetAll() {
+      slides = document.getElementsByClassName("slides");
       for (i = 0; i < allNum; i++) {
         var curr = slides[i].classList;
         if (curr.contains("active")) {
@@ -148,4 +163,4 @@
   </script>
 </body>
 
-</html>
+</html
