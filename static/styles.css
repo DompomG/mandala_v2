@@ -6,6 +6,7 @@ body {
 
 html,
 body {
+    width: 100%;
     height: 100%;
 }
 
@@ -71,13 +72,13 @@ body {
     background-color: rgb(94, 94, 94);
 }
 
-.list-group-item {
+.item {
     max-height: 200px;
     background-color: rgb(141, 141, 141);
     overflow: hidden;
     padding: 0px;
     margin: 0px;
-    border-style:none;
+    border-style: none;
 }
 
 .item-active {
@@ -86,18 +87,18 @@ body {
     border-color: #fcba03;
 }
 
-.slides {
-    width: 100%;
-    height: auto;
 
+
+.sl-active-color {
+    background-color: #fde7ab !important;
 }
 
-.slides-active {
-    background-color: #fde7ab !important; 
+.active {
+    display: block !important;
 }
 
-.slides-hidden {
-    display: none; 
+.hide {
+    display: none;
 }
 
 .list-img {
@@ -111,24 +112,27 @@ body {
 }
 
 
-#col-1-pre-display {
-    width: 70%;
+#display {
+    width: 100%;
     height: 85px;
     margin-left: auto;
     margin-right: auto;
-    background: none;
+    border-style: none;
+
 }
 
 .btn {
     margin-left: auto;
     margin-right: auto;
+    margin-top: 15px;
+    margin-bottom: 15px;
     background-color: #c8c8c8;
-    margin-top: 20px;
     border-color: black;
     color: black;
 }
 
-#col-2-img-wrap {
+#mainImg-wrap,
+#mainImg-wrap2 {
     padding: 15px;
     background-color: rgb(56, 56, 56);
     width: 100%;
@@ -136,7 +140,7 @@ body {
     justify-content: center;
 }
 
-.col-2-img {
+.mainImg {
     width: inherit;
     max-width: 475px;
     max-height: 475px;
@@ -168,12 +172,14 @@ body {
 
 #mandala-bg-img {
     position: absolute;
-    bottom: -400;
-    left: -200;
+    bottom: -200;
+    right: -378;
     z-index: -1;
-    width: 300px;
+    margin-top: -143px;
+    margin-bottom: 194px;
+    margin-left: -192px;
+    width: 293px;
     height: auto;
-    top: -50;
 }
 
 #fox-bg-img {
@@ -181,4 +187,7 @@ body {
     bottom: -200;
     right: -378;
     z-index: -1;
+    margin-top: 320px;
+    margin-bottom: 67px;
+    margin-right: -595px;
 }

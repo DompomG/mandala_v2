@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles.css') }}" />
+  <link rel="stylesheet" type="text/css" href="../static/styles.css">
+  <title>Mandala Diffusion App</title>
+  <style>
+    body {
+      background-color: rgb(236, 236, 236);
+      transition: transform .2s;
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+    <div class="container-fluid">
+      <img src="../static/logo_small.png" id="logo-icon">
+      <a class="navbar-brand" href="#">Mandala Magic</a>
+    </div>
+  </nav>
+
+  <div class="container" #id="main-content">
+    <div class="row" id="main-row">
+
+      <div class="col-lg order-lg-1" id="list-wrap">
+        <ul id="list" class="list-group">
+          <img src="../static/side_mandala.png" id="mandala-bg-img">
+          <li class="items item">
+            <img src="../static/animal_bg.png" class="list-img">
+          </li>
+          <li class="items item">
+            <img src="../static/nature_bg.png" class="list-img">
+          </li>
+          <li class="items" id="display">
+            <div class="row">
+              <button type="button" class="btn btn-lg btn-outline-primary">Neu</button>
+              <button type="button" class="btn btn-lg btn-outline-primary" id="stop">Stop</button>
+              <button type="button" class="btn btn-lg btn-outline-primary">Start</button>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="col-lg order-lg-2 order-first " id="mainImg-wrap">
+        <img src="../static/01_lion.png" class="slides mainImg sl-active-color hide">
+        <img src="../static/02_owl.png" class="slides mainImg sl-active-color hide">
+        <img src="../static/03_fox.png" class="slides mainImg sl-active-color hide">
+        <img src="../static/init_mandala.png" id="frontImg" class="slides mainImg hide active">
+
+
+        <img src="../static/fox_bg.png" id="fox-bg-img">
+      </div>
+    </div>
+
+  </div>
+  <div id="footer">
+    <p>© 2023 Dominik Geyer, Inc. All rights reserved.</p>
+  </div>
+
+  <script>
+    //Params
+    var slide_list = document.getElementById("mainImg-wrap");
+    var slides = slide_list.getElementsByClassName("slides");
+    var item_list = document.getElementById("list");
+    var items = item_list.getElementsByClassName("item");
+    var allNum = slides.length;
+    var slNum = slides.length - 1;
+    var slider = 0;
+    var index = 0;
+    var actives = 0;
+
+    console.log("Slides: " + slNum + "; Selection Items: " + items.length);
+
+
+    function start() {
+      activeItem(this);
+      stop();
+      resetAll();
+      index = slNum;
+      swapClass(slides[slNum - 1], "active");
+      slider = setInterval(next, 1000);
+    }
+
+    function stop() {
+      clearInterval(slider);
+    }
+
+    function swapClass(elem, name) {
+      elem = elem.classList;
+      if (elem.contains(name)) {
+        elem.remove(name);
+      } else {
+        elem.add(name);
+      }
+    }
+
+    //EventListeners
+    for (var i = 0; i < items.length; i++) {
+      items[i].addEventListener("click", start);
+      //items[i].addEventListener("click", activeItem);
+      console.log("Added EventListener: " + i);
+    }
+    var btn = document.getElementById("stop");
+    const stop_btn = btn.addEventListener("click", stop);
+
+    function activeItem(curr) {
+      var elem = document.getElementsByClassName("item-active");
+      if (elem.length > 0) {
+        elem[0].classList.remove("item-active");
+      }
+      curr.classList.add("item-active");
+    }
+
+    function next() {
+      slide_list = document.getElementById("mainImg-wrap");
+      slides = slide_list.getElementsByClassName("slides");
+      console.log("Active Slide: " + (index % slNum) + "; Pre Slide: " + ((index - 1) % slNum) + "; Index: " + index);
+
+      var pre = slides[(index - 1) % slNum];
+      var current = slides[index % slNum];
+      resetAll();
+      swapClass(current, "active");
+      index++;
+    }
+
+    function hideElement(elem) {
+      elem = elem.classList;
+      if (elem.contains("active")) {
+        elem.remove("active");
+      }
+    }
+
+    function resetAll() {
+      for (i = 0; i < allNum; i++) {
+        var curr = slides[i].classList;
+        if (curr.contains("active")) {
+          curr.remove("active");
+        }
+      }
+    }
+  </script>
+</body>
+
+</html>

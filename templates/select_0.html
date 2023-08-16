@@ -78,23 +78,51 @@
     });
 
 
-    for (var i = 0; i < items.length; i++) {
-      items[i].addEventListener("click", onClick)
-    }
+ 
 
     function onClick() {
       showSlides();
-        var current = document.getElementsByClassName("item-active");
-        if (current.length > 0) {
-          current[0].className = current[0].className.replace(" item-active", "");
-        }
-        this.className += " item-active";
+      var current = document.getElementsByClassName("item-active");
+      if (current.length > 0) {
+        current[0].className = current[0].className.replace(" item-active", "");
+      }
+      this.className += " item-active";
     }
+    var slide = setInterval(showSlides, 1000);
 
     function showSlides() {
-      limit=1;
-      nextSlide();
+      //limit = 1;
+      //nextSlide();
+      clearInterval(slide);
+      slide = setInterval(nextStep, 1000);
     }
+    
+    function nextStep() {
+      var frontImg = document.getElementById("frontImg");
+      var isHidden = frontImg.className.includes("slides-hidden") ? false : true;
+      if (isHidden) {
+        frontImg.classList.add("slides-hidden");
+        console.log("Hide FrontImage!");
+      }
+      index++;
+
+      if (index >= 4) {
+        console.log("Loop Complete! i = " + index);
+        var activeItem = document.getElementsByClassName("item-active");
+        activeItem[0].classList.remove("item-active");
+        frontImg.classList.remove("slides-hidden");
+        slides[(index - 1) % count].classList.add("slides-hidden");
+        index = 0;
+      } else {
+        slides[index % count].classList.remove("slides-hidden");
+        if (slides[(index - 1) % count].className.includes("slides-hidden") == false) {
+          slides[(index - 1) % count].classList.add("slides-hidden");
+        }
+        //clearInterval(slide);
+      }
+    }
+
+
 
     function nextSlide() {
       var frontImg = document.getElementById("frontImg");
@@ -126,7 +154,7 @@
       } else if (limit > 0) {
         console.log("limit = " + limit);
         limit -= 1;
-      } 
+      }
     }
 
   </script>
