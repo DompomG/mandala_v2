@@ -57,8 +57,12 @@
         <img src="../static/04_tree2.png" class="slides mainImg sl-active-color hide">
         <img src="../static/04_tree3.png" class="slides mainImg sl-active-color hide">
         <img src="../static/init_mandala.png" id="frontImg" class="slides mainImg hide active">
-
-
+        <div class="btn-wrap" id="arrow-left">
+            <img src="../static/btn_left.png" class="arrow" onclick="swapImg(1)">
+        </div>
+        <div class="btn-wrap" id="arrow-right">
+          <img src="../static/btn_right.png" class="arrow" onclick="swapImg(2)">
+        </div>
         <img src="../static/fox_bg.png" id="fox-bg-img">
       </div>
     </div>
@@ -69,6 +73,12 @@
   </div>
 
   <script>
+function swapImg(direction) {
+  //stop();  
+  next(direction);
+  start();
+}
+
     //Params
     var slide_list = document.getElementById("mainImg-wrap");
     var slides = slide_list.getElementsByClassName("slides");
@@ -85,6 +95,18 @@
 
     console.log("Slides: " + slNum + "; Selection Items: " + items.length);
 
+    //EventListeners
+    for (var i = 0; i < items.length; i++) {
+      items[i].addEventListener("click", start);
+      //items[i].addEventListener("click", onClick);
+      console.log("Added EventListener: " + i);
+    }
+    var btn = document.getElementById("stop");
+    const stop_btn = btn.addEventListener("click", stop);
+
+
+
+
 
     function start() {
       id = Array.from(this.parentNode.children).indexOf(this) - 1;
@@ -94,7 +116,7 @@
       //index = id == 0 ? allNum : halfNum;
       index = 0;
       swapClass(slides[slNum], "active");
-      slider = setInterval(next, 1000);
+      slider = setInterval(next, 1500);
     }
 
     function stop() {
@@ -111,15 +133,6 @@
       }
     }
 
-    //EventListeners
-    for (var i = 0; i < items.length; i++) {
-      items[i].addEventListener("click", start);
-      //items[i].addEventListener("click", onClick);
-      console.log("Added EventListener: " + i);
-    }
-    var btn = document.getElementById("stop");
-    const stop_btn = btn.addEventListener("click", stop);
-
     function activeItem(curr) {
       var elem = document.getElementsByClassName("item-active");
       if (elem.length > 0) {
@@ -128,10 +141,10 @@
       curr.classList.add("item-active");
     }
 
-    function next() {
+    function next(direction) {
       slide_list = document.getElementById("mainImg-wrap");
       slides = slide_list.getElementsByClassName("slides");
-      
+
       if (id == 0) idIndex = 0;
       else {
         idIndex = halfNum;
@@ -141,7 +154,12 @@
       console.log("Active Slide: " + currIndex + "; Index: " + index);
       resetAll();
       swapClass(current, "active");
-      index++;
+      if (direction != null && direction == 2) {
+      index--;
+      } else {
+        index++;
+      }
+
     }
 
     function hideElement(elem) {

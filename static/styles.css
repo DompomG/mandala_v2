@@ -4,6 +4,11 @@ body {
     text-align: center;
 }
 
+#img {
+    width: 100%;
+    height: auto;
+}
+
 html,
 body {
     width: 100%;
@@ -190,4 +195,35 @@ body {
     margin-top: 320px;
     margin-bottom: 67px;
     margin-right: -595px;
+}
+
+#arrow-left {
+    left: 21px;
+}
+
+#arrow-right {
+    right:25px;
+    top: 25px;
+}
+
+
+.arrow{
+    margin-top: 200px;
+    width: inherit;
+    height: auto;
+    background-color: #d7d7d7;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.btn-wrap {
+    position: absolute;
+    display: block;
+    z-index: 1;
+    width: 50px;
+    height: auto;
+    background: none;
+    border-style: none;
+    margin-left: auto;
+    margin-right: auto;
 }
