@@ -33,16 +33,22 @@
         <ul id="list" class="list-group">
           <img src="../static/side_mandala.png" id="mandala-bg-img">
           <li class="items item">
+            <div class="item-text-wrap">
+              <p class="item-text">TIER</p>
+            </div>
             <img src="../static/animal_bg.png" class="list-img">
           </li>
           <li class="items item">
+            <div class="item-text-wrap">
+              <p class="item-text">NATUR</p>
+            </div>
             <img src="../static/nature_bg.png" class="list-img">
           </li>
           <li class="items" id="display">
             <div class="row">
-              <button type="button" class="btn btn-lg btn-outline-primary">Neu</button>
-              <button type="button" class="btn btn-lg btn-outline-primary" id="stop">Stop</button>
-              <button type="button" class="btn btn-lg btn-outline-primary">Start</button>
+              <button type="button" class="btn btn-lg btn-outline-primary"><img src="../static/icons-reset.png" class="icon"></button>
+              <button type="button" class="btn btn-lg btn-outline-primary" id="stop" class="icon"><img src="../static/icon-stop.png" class="icon"></button>
+              <button type="button" class="btn btn-lg btn-outline-primary"><img src="../static/icon-submit.png" class="icon"></button>
             </div>
           </li>
         </ul>
@@ -58,7 +64,7 @@
         <img src="../static/04_tree3.png" class="slides mainImg sl-active-color hide">
         <img src="../static/init_mandala.png" id="frontImg" class="slides mainImg hide active">
         <div class="btn-wrap" id="arrow-left">
-            <img src="../static/btn_left.png" class="arrow" onclick="swapImg(1)">
+          <img src="../static/btn_left.png" class="arrow" onclick="swapImg(1)">
         </div>
         <div class="btn-wrap" id="arrow-right">
           <img src="../static/btn_right.png" class="arrow" onclick="swapImg(2)">
@@ -73,12 +79,6 @@
   </div>
 
   <script>
-function swapImg(direction) {
-  //stop();  
-  next(direction);
-  start();
-}
-
     //Params
     var slide_list = document.getElementById("mainImg-wrap");
     var slides = slide_list.getElementsByClassName("slides");
@@ -98,9 +98,9 @@ function swapImg(direction) {
     //EventListeners
     for (var i = 0; i < items.length; i++) {
       items[i].addEventListener("click", start);
-      //items[i].addEventListener("click", onClick);
       console.log("Added EventListener: " + i);
     }
+    //Stop Button
     var btn = document.getElementById("stop");
     const stop_btn = btn.addEventListener("click", stop);
 
@@ -113,8 +113,6 @@ function swapImg(direction) {
       activeItem(this);
       stop();
       resetAll();
-      //index = id == 0 ? allNum : halfNum;
-      index = 0;
       swapClass(slides[slNum], "active");
       slider = setInterval(next, 1500);
     }
@@ -123,13 +121,13 @@ function swapImg(direction) {
       clearInterval(slider);
     }
 
+
     function swapClass(elem, name) {
       elem = elem.classList;
       if (elem.contains(name)) {
         elem.remove(name);
       } else {
         elem.add(name);
-        console.log("Added Active: " + elem);
       }
     }
 
@@ -141,25 +139,38 @@ function swapImg(direction) {
       curr.classList.add("item-active");
     }
 
+    function swapImg(direction) {
+      next(direction);
+    }
+
     function next(direction) {
       slide_list = document.getElementById("mainImg-wrap");
       slides = slide_list.getElementsByClassName("slides");
 
-      if (id == 0) idIndex = 0;
+      if (id == 0) {
+        idIndex = 0;
+      }
       else {
         idIndex = halfNum;
       }
-      var currIndex = (index % halfNum) + idIndex;
-      var current = slides[currIndex];
-      console.log("Active Slide: " + currIndex + "; Index: " + index);
+
+      var tempIndex = (index % halfNum) + idIndex;
+      var current = slides[tempIndex];
+      console.log("Active Image:" + tempIndex + "; Index: " + index);
+
+      //Reset All
       resetAll();
+      //Activate Current
       swapClass(current, "active");
-      if (direction != null && direction == 2) {
-      index--;
+
+      if (direction != null && direction == 1) {
+        //slide left
+        index--;
+        index = index < 0 ? halfNum - 1 : index;
       } else {
+        //slide right
         index++;
       }
-
     }
 
     function hideElement(elem) {
