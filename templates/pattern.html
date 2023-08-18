@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles-pattern.css') }}" />
+  <title>Mandala Diffusion App</title>
+
+  <style>
+    body {
+      background-color: rgb(236, 236, 236);
+      transition: transform .2s;
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="{{ url_for('home') }}">
+        <img src="{{ url_for('static',filename='images/logo_small.png') }}" id="logo-icon">
+        <p id="title">Mandala Magic</p>
+      </a>
+    </div>
+  </nav>
+
+  <div class="container" #id="main-content">
+    <div class="row" id="main-row">
+
+      <div class="col-lg order-lg-1" id="list-wrap">
+        <ul id="list" class="list-group">
+          <img src="{{ url_for('static',filename='images/side_mandala.png') }}" id="mandala-bg-img">
+          
+          <li class="items item">
+            <div class="item-text-wrap">
+              <p class="item-text">STREIFEN</p>
+            </div>
+            <img src="{{ url_for('static',filename='images/animal_bg.png') }}" class="list-img">
+          </li>
+          
+          <li class="items item">
+            <div class="item-text-wrap">
+              <p class="item-text">Afrikan</p>
+            </div>
+            <img src="{{ url_for('static',filename='images/nature_bg.png') }}" class="list-img">
+          </li>
+
+          <li class="items item">
+            <div class="item-text-wrap">
+              <p class="item-text">Doodle</p>
+            </div>
+            <img src="{{ url_for('static',filename='images/nature_bg.png') }}" class="list-img">
+          </li>
+
+          <li class="items" id="display">
+            <div class="row">
+              <button type="button" class="btn btn-lg btn-outline-primary" id="reset">
+                  <img src="{{ url_for('static',filename='images/icons-reset.png') }}" class="icon"></button>
+              <button type="button" class="btn btn-lg btn-outline-primary" id="stop" class="icon">
+                 <img src="{{ url_for('static',filename='images/icon-stop.png') }}" class="icon"></button>
+                 <form action="{{ url_for('generate') }}" class="btn btn-lg btn-outline-primary" id="start" method="post">
+                  <input type="hidden" name="select" value="0" id="value">
+                  <button type="reset" id="submit">
+                    <img src="{{ url_for('static',filename='images/icon-submit.png') }}" class="icon">
+                  </button>
+                </form>
+          </li>
+        </ul>
+      </div>
+
+      <div class="col-lg order-lg-2 order-first " id="mainImg-wrap">
+        {% for obj in slides %}
+        <img class="slides mainImg sl-active-color hide" src="{{ url_for('static',filename='images/'+obj) }}">
+        {% endfor %}
+        <img src="{{ url_for('static',filename='images/'+image_name) }}" class="slides mainImg hide active">
+
+        <div class="btn-wrap" id="arrow-left">
+          <img src="{{ url_for('static',filename='images/btn_left.png') }}" class="btn btn-lg btn-outline-primary arrow"
+            onclick="swapImg(1)">
+        </div>
+        <div class="btn-wrap" id="arrow-right">
+          <img src="{{ url_for('static',filename='images/btn_right.png') }}"
+            class="btn btn-lg btn-outline-primary arrow" onclick="swapImg(2)">
+        </div>
+        <img src="{{ url_for('static',filename='images/fox_bg.png') }}" id="fox-bg-img">
+      </div>
+    </div>
+
+  </div>
+  <div id="footer">
+    <p>© 2023 Dominik Geyer, Inc. All rights reserved.</p>
+  </div>
+
+
+
+  <script type="text/javascript" src="../static/scripts.js"></script>
+</body>
+
+</html

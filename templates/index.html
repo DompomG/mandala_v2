@@ -21,7 +21,7 @@
 <body>
   <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
     <div class="container-fluid">
-      <img src="../static/logo_small.png" id="logo-icon">
+      <img src="../static/images/logo_small.png" id="logo-icon">
       <a class="navbar-brand" href="#">Mandala Magic</a>
     </div>
   </nav>
@@ -31,45 +31,45 @@
 
       <div class="col-lg order-lg-1" id="list-wrap">
         <ul id="list" class="list-group">
-          <img src="../static/side_mandala.png" id="mandala-bg-img">
+          <img src="../static/images/side_mandala.png" id="mandala-bg-img">
           <li class="items item">
             <div class="item-text-wrap">
               <p class="item-text">TIER</p>
             </div>
-            <img src="../static/animal_bg.png" class="list-img">
+            <img src="../static/images/animal_bg.png" class="list-img">
           </li>
           <li class="items item">
             <div class="item-text-wrap">
               <p class="item-text">NATUR</p>
             </div>
-            <img src="../static/nature_bg.png" class="list-img">
+            <img src="../static/images/nature_bg.png" class="list-img">
           </li>
           <li class="items" id="display">
             <div class="row">
-              <button type="button" class="btn btn-lg btn-outline-primary"><img src="../static/icons-reset.png" class="icon"></button>
-              <button type="button" class="btn btn-lg btn-outline-primary" id="stop" class="icon"><img src="../static/icon-stop.png" class="icon"></button>
-              <button type="button" class="btn btn-lg btn-outline-primary"><img src="../static/icon-submit.png" class="icon"></button>
+              <button type="button" class="btn btn-lg btn-outline-primary"><img src="../static/images/icons-reset.png" class="icon"></button>
+              <button type="button" class="btn btn-lg btn-outline-primary" id="stop" class="icon"><img src="../static/images/icon-stop.png" class="icon"></button>
+              <button type="button" class="btn btn-lg btn-outline-primary"><img src="../static/images/icon-submit.png" class="icon"></button>
             </div>
           </li>
         </ul>
       </div>
 
       <div class="col-lg order-lg-2 order-first " id="mainImg-wrap">
-        <img src="../static/01_lion.png" class="slides mainImg sl-active-color hide">
-        <img src="../static/02_owl.png" class="slides mainImg sl-active-color hide">
-        <img src="../static/03_fox.png" class="slides mainImg sl-active-color hide">
-
-        <img src="../static/04_tree1.png" class="slides mainImg sl-active-color hide">
-        <img src="../static/04_tree2.png" class="slides mainImg sl-active-color hide">
-        <img src="../static/04_tree3.png" class="slides mainImg sl-active-color hide">
-        <img src="../static/init_mandala.png" id="frontImg" class="slides mainImg hide active">
+        <img src="../static/images/01_lion.png" class="slides mainImg sl-active-color hide">
+        <img src="../static/images/02_owl.png" class="slides mainImg sl-active-color hide">
+        <img src="../static/images/03_fox.png" class="slides mainImg sl-active-color hide">
+/images
+        <img src="../static/images/04_tree1.png" class="slides mainImg sl-active-color hide">
+        <img src="../static/images/04_tree2.png" class="slides mainImg sl-active-color hide">
+        <img src="../static/images/04_tree3.png" class="slides mainImg sl-active-color hide">
+        <img src="../static/images/init_mandala.png" id="frontImg" class="slides mainImg hide active">
         <div class="btn-wrap" id="arrow-left">
-          <img src="../static/btn_left.png" class="arrow" onclick="swapImg(1)">
+          <img src="../static/images/btn_left.png" class="arrow" onclick="swapImg(1)">
         </div>
         <div class="btn-wrap" id="arrow-right">
-          <img src="../static/btn_right.png" class="arrow" onclick="swapImg(2)">
+          <img src="../static/images/btn_right.png" class="arrow" onclick="swapImg(2)">
         </div>
-        <img src="../static/fox_bg.png" id="fox-bg-img">
+        <img src="../static/images/fox_bg.png" id="fox-bg-img">
       </div>
     </div>
 
@@ -78,117 +78,7 @@
     <p>© 2023 Dominik Geyer, Inc. All rights reserved.</p>
   </div>
 
-  <script>
-    //Params
-    var slide_list = document.getElementById("mainImg-wrap");
-    var slides = slide_list.getElementsByClassName("slides");
-    var item_list = document.getElementById("list");
-    var items = item_list.getElementsByClassName("item");
-    var allNum = slides.length;
-    var slNum = slides.length - 1;
-    var halfNum = Math.floor(slNum / 2);
-    var slider = 0;
-    var index = 0;
-    var actives = 0;
-    var idIindex = 0;
-    var id = 0;
-
-    console.log("Slides: " + slNum + "; Selection Items: " + items.length);
-
-    //EventListeners
-    for (var i = 0; i < items.length; i++) {
-      items[i].addEventListener("click", start);
-      console.log("Added EventListener: " + i);
-    }
-    //Stop Button
-    var btn = document.getElementById("stop");
-    const stop_btn = btn.addEventListener("click", stop);
-
-
-
-
-
-    function start() {
-      id = Array.from(this.parentNode.children).indexOf(this) - 1;
-      activeItem(this);
-      stop();
-      resetAll();
-      swapClass(slides[slNum], "active");
-      slider = setInterval(next, 1500);
-    }
-
-    function stop() {
-      clearInterval(slider);
-    }
-
-
-    function swapClass(elem, name) {
-      elem = elem.classList;
-      if (elem.contains(name)) {
-        elem.remove(name);
-      } else {
-        elem.add(name);
-      }
-    }
-
-    function activeItem(curr) {
-      var elem = document.getElementsByClassName("item-active");
-      if (elem.length > 0) {
-        elem[0].classList.remove("item-active");
-      }
-      curr.classList.add("item-active");
-    }
-
-    function swapImg(direction) {
-      next(direction);
-    }
-
-    function next(direction) {
-      slide_list = document.getElementById("mainImg-wrap");
-      slides = slide_list.getElementsByClassName("slides");
-
-      if (id == 0) {
-        idIndex = 0;
-      }
-      else {
-        idIndex = halfNum;
-      }
-
-      var tempIndex = (index % halfNum) + idIndex;
-      var current = slides[tempIndex];
-      console.log("Active Image:" + tempIndex + "; Index: " + index);
-
-      //Reset All
-      resetAll();
-      //Activate Current
-      swapClass(current, "active");
-
-      if (direction != null && direction == 1) {
-        //slide left
-        index--;
-        index = index < 0 ? halfNum - 1 : index;
-      } else {
-        //slide right
-        index++;
-      }
-    }
-
-    function hideElement(elem) {
-      elem = elem.classList;
-      if (elem.contains("active")) {
-        elem.remove("active");
-      }
-    }
-
-    function resetAll() {
-      slides = document.getElementsByClassName("slides");
-      for (i = 0; i < allNum; i++) {
-        var curr = slides[i].classList;
-        if (curr.contains("active")) {
-          curr.remove("active");
-        }
-      }
-    }
+  <script src="../static/script.js">
   </script>
 </body>
 

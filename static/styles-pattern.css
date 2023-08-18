@@ -22,16 +22,27 @@ body {
 
 .navbar-brand {
     margin-right: auto;
-    margin-left: 20px;
-    float: left;
+    margin-left: 0px;
 }
 
 #logo-icon {
     width: 33px;
+    float: left;
+    margin-right: 10px;
+}
+
+#start,
+#reset,
+#stop {
+    color: #000;
 }
 
 #main-content {
     padding-bottom: 50px;
+}
+
+#title {
+    margin-bottom: 0px;
 }
 
 #main-row {
@@ -49,7 +60,7 @@ body {
     z-index: 3;
     background-color: rgb(139, 139, 139);
     text-align: center;
-    padding-top: 250px;
+    padding-top: 150px;
 }
 
 .container {
@@ -80,7 +91,7 @@ body {
 
 .item {
     position: relative;
-    max-height: 200px;
+    max-height: 133px;
     background-color: rgb(141, 141, 141);
     overflow: hidden;
     padding: 0px;
@@ -92,6 +103,26 @@ body {
     border-style: solid;
     border-width: 5px !important;
     border-color: #fcba03;
+}
+
+.btn {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    background-color: #c8c8c8;
+    border-style: none;
+    color: black;
+    max-width: 100px;
+    max-height: 55px;
+}
+
+.btn-active {
+    background-color: #fcba03;
+}
+
+.btn-active:hover {
+    background-color: #007bff;
 }
 
 
@@ -128,17 +159,11 @@ body {
 
 }
 
-.btn {
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 15px;
-    margin-bottom: 15px;
-    background-color: #c8c8c8;
-    border-color: black;
-    color: black;
-    max-width: 100px;
-    max-height: 55px;
+p.navbar-brand {
+    margin-bottom: 0px;
 }
+
+
 
 #mainImg-wrap,
 #mainImg-wrap2 {
@@ -210,6 +235,16 @@ body {
     top: 25px;
 }
 
+#submit {
+    background-color: rgba(0, 0, 0, 0);
+    border-style: none;
+}
+
+button, select {
+    border-style: none;
+    background-color: rgba(0, 0, 0, 0);
+}
+
 .item-text-wrap {
     position: absolute;
     top: 0px;
@@ -221,7 +256,7 @@ body {
     border-radius: 0px 0px 0px 20px;
     height: 35px;
     margin-bottom: auto;
-    width: 84px;
+    width: 100px;
 }
 
 .item-text {
@@ -238,6 +273,7 @@ body {
     background-color: #d7d7d7;
     padding: 10px;
     border-radius: 10px;
+    border-style: none;
 }
 
 .btn-wrap {
