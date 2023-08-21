@@ -33,7 +33,8 @@
             {% for obj in slides %}
             <img class="slides mainImg sl-active-color hide" src="{{ url_for('static',filename='images/'+obj) }}">
             {% endfor %}
-            <img src="{{ url_for('static',filename='images/init_mandala.png') }}" class="slides mainImg hide active">
+            <img src="{{ url_for('static',filename='images/init_mandala.png') }}" class="slides mainImg hide">
+            <img src="data:image/png;base64,{{ img_data }}" class="slides mainImg hide active">
 
             <div class="btn-wrap" id="arrow-left">
                 <img src="{{ url_for('static',filename='images/btn_left.png') }}"
