@@ -30,11 +30,10 @@
 
     <div class="container" id="main-content">
         <div class="col-lg order-lg-2 order-first " id="mainImg-wrap">
-            {% for obj in slides %}
-            <img class="slides mainImg sl-active-color hide" src="{{ url_for('static',filename='images/'+obj) }}">
+            {% for image in img_data %}
+            <img src="data:image/png;base64,{{ image }}" class="slides mainImg hide">
             {% endfor %}
-            <img src="{{ url_for('static',filename='images/init_mandala.png') }}" class="slides mainImg hide">
-            <img src="data:image/png;base64,{{ img_data }}" class="slides mainImg hide active">
+            <img src="{{ url_for('static',filename='images/init_mandala.png') }}" class="slides mainImg hide active">
 
             <div class="btn-wrap" id="arrow-left">
                 <img src="{{ url_for('static',filename='images/btn_left.png') }}"
