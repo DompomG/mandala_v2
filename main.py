@@ -8,12 +8,19 @@ import io
 app = Flask(__name__)
 
 from prompt_dict import templates, prompt_dict
+
+#Params
 id = 0
-prompt = []   
-def reset_prompt(i, selection):
-  while len(prompt) >= i:
-    prompt.pop(len(prompt)-1)
-  prompt.append(selection)
+id_style = 0
+prompt = [] 
+
+def add_prompt_id(index, elem):
+  if (index == 0):
+    prompt.clear()
+  else:
+    while (len(prompt) > 1):
+      prompt.pop(0)
+  prompt.append(elem)
 
 slides = ["01_lion.png", "02_owl.png", "03_fox.png", "04_tree1.png", "04_tree2.png", "04_tree3.png"]
 slides2 = ["01_lion.png", "02_owl.png", "03_fox.png", "04_tree1.png", "04_tree2.png", "04_tree3.png", "04_tree1.png", "04_tree2.png", "04_tree3.png"]
@@ -30,26 +37,25 @@ def home():
 
 @app.route('/pattern', methods=['POST', 'GET'])
 def pattern():
-  id = request.form.get('select')
+  id = request.form.get('selection')
+  add_prompt_id(0, id)
   print("Picked Image " + id + ": " + str(slides[int(id)]))
   image_name = slides[int(id)]
   return render_template("pattern.html", slides=slides2, image_name=image_name)
 
 
-@app.route('/result', methods=['POST', 'GET'])
-def result():
+@app.route('/generate', methods=['POST', 'GET'])
+def generate():
+  id_style = request.form.get('selection')
+  add_prompt_id(0, id_style)  
+
   img = Image.open('static/images/fox_mandala.png')
 
   data = io.BytesIO()
   img.save(data, format='PNG')
   encoded_img_data = base64.b64encode(data.getvalue())
 
-  #prompt_str = ""
-  #for x in prompt:
-  #  prompt_str += x + ", "
-  #print('Current Prompt: ' + prompt_str)
-
-  return render_template('result.html', img_data=encoded_img_data.decode('utf-8'))#, prompt_str=prompt_str)
+  return render_template('result.html', img_data=encoded_img_data.decode('utf-8'))
 
 if __name__ == '__main__':
   #app.run()
