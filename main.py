@@ -39,9 +39,9 @@ def home():
 def pattern():
   id = request.form.get('selection')
   add_prompt_id(0, id)
-  print("Picked Image " + id + ": " + str(slides[int(id)]))
+  print("Picked Image " + id + ": " + slides[int(id)])
   image_name = slides[int(id)]
-  return render_template("pattern.html", slides=slides2, image_name=image_name)
+  return render_template("pattern.html", slides=slides2, image_name=image_name, id=id)
 
 
 @app.route('/generate', methods=['POST', 'GET'])
@@ -49,13 +49,13 @@ def generate():
   id_style = request.form.get('selection')
   add_prompt_id(1, id_style)  
 
-  img = Image.open('static/images/fox_mandala.png')
-
-  data = io.BytesIO()
-  img.save(data, format='PNG')
-  encoded_img_data = base64.b64encode(data.getvalue())
-
-  return render_template('result.html', generated_img=encoded_img_data.decode('utf-8'))
+  generated_images = []
+  for i in range(len(slides3)):
+    data = io.BytesIO()
+    img = Image.open('static/images/' + slides3[i])
+    img.save(data, format='PNG')
+    generated_images.append(base64.b64encode(data.getvalue()).decode('utf-8'))
+  return render_template('result.html', generated_img=generated_images)
 
 if __name__ == '__main__':
   #app.run()

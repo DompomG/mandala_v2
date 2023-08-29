@@ -33,7 +33,7 @@
             {% for obj in generated_img %}
             <img src="data:image/png;base64,{{ obj }}" class="generated slides mainImg hide">
             {% endfor %}
-            <img src="{{ url_for('static',filename='images/init_mandala.png') }}" class="slides mainImg hide active">
+            <img src="{{ url_for('static',filename='images/init_mandala.png') }}" class="slides mainImg hide">
 
             <div class="btn-wrap" id="arrow-left">
                 <img src="{{ url_for('static',filename='images/btn_left.png') }}"

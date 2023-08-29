@@ -52,7 +52,7 @@ function start() {
   //}
   stop();
   activeItem(this);
-  resetStates(slides);
+  resetStates();
   //Show Initial Image
   slides[id * maxSteps].classList.add("active");
   //Start Interval
@@ -78,6 +78,12 @@ function swapClass(elem, name) {
     elem.remove(name);
   } else {
     elem.add(name);
+  }
+}
+
+function swapImg(direction) {
+  if (is_playing == true) {
+    next(direction);
   }
 }
 
@@ -136,7 +142,7 @@ function next(direction) {
   console.log("Active Image:" + slideIndex + "; Index: " + index);
 
   //Refresh All Active Slides
-  resetStates(slides);
+  resetStates();
   //Activate Current Slide
   swapClass(current, "active");
 }
@@ -160,7 +166,7 @@ function resetValues() {
   indexInterval = [0, maxSteps, maxSteps * 2];
 }
 
-function resetStates(activeItems) {
+function resetStates() {
   resetValues;
   for (i = 0; i < allNum; i++) {
     var curr = slides[i].classList;

@@ -1,29 +1,28 @@
 var slides = document.getElementsByClassName("slides");
-var maxSteps = slides.length - 1;
-var count = 0;
+var slNum = slides.length - 1;
+var slider = 0;
+var index = 0;
 index = 0;
+is_playing = false;
+var play_btn = document.getElementById("play");
 
-document.getElementById("mainImg-wrap").addEventListener("load", start(count));
+document.getElementById("mainImg-wrap").addEventListener("load", start());
+document.getElementById("stop").addEventListener("click", stop);
 
 
 //Start Interval
-function start(curr_count) {
-    current = document.getElementsByClassName("slides")
-    generations = document.getElementsByClassName("generated")
-    if (!is_playing) {
-        play_btn.addEventListener("click", play);
-    }
-    if (generations.length == 0) {
-        console.log("Waiting for successful Generation!")     
-    } else {
-        resetStates;
-        stop();
-        //Show Current Image
-        slides[curr_count].classList.add("active");
-        //Start Interval
-        slider = setInterval(next, 1500);
-        is_playing = true;
-    }
+function start() {
+    console.log("Run Method: Start!!!!!");
+    //if (!is_playing) {
+    //    play_btn.addEventListener("click", play);
+    //}
+    resetStates();
+    stop();
+    //Show Current Image
+    slides[0].classList.add("active");
+    //Start Interval
+    slider = setInterval(next, 1500);
+    is_playing = true;
 }
 
 //Stop Interval
@@ -42,7 +41,9 @@ function swapClass(elem, name) {
 }
 
 function swapImg(direction) {
-    next(direction);
+    if (is_playing == true) {
+        next(direction);
+    }
 }
 
 
@@ -50,33 +51,34 @@ function next(direction) {
     if (direction != null && direction == 1) {
         //step left
         index--;
-        index = index < 0 ? maxSteps - 1 : index;
+        index = index < 0 ? slNum : index;
     } else {
         //step right
         index++;
     }
-    count++;
-    slide_list = document.getElementById("mainImg-wrap");
-    slides = slide_list.getElementsByClassName("slides");
 
     //Current Slide
-    var slideIndex = (index % maxSteps) + maxSteps;
+    var slideIndex = index % slNum;
     var current = slides[slideIndex];
 
     console.log("Active Image:" + slideIndex + "; Index: " + index);
 
     //Refresh All Active Slides
-    resetStates;
+    resetStates();
+    var actives = document.getElementsByClassName("active");
+    console.log("Found: " + actives.length);
     //Activate Current Slide
     swapClass(current, "active");
+    actives = document.getElementsByClassName("active");
+    console.log("After swapClass Found: " + actives.length);
 }
 
 function resetStates() {
-    for (i = 0; i < allNum; i++) {
-      var curr = slides[i].classList;
-      if (curr.contains("active")) {
-        curr.remove("active");
-      }
+    slides = document.getElementsByClassName("slides");
+    for (i = 0; i < slNum; i++) {
+        var curr = slides[i].classList;
+        if (curr.contains("active")) {
+            curr.remove("active");
+        }
     }
-  }
-  
+}
