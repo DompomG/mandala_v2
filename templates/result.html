@@ -31,7 +31,7 @@
     <div class="container" id="main-content">
         <div class="col-lg order-lg-2 order-first " id="mainImg-wrap">
             {% for obj in generated_img %}
-            <img src="data:image/png;base64,{{ obj }}" class="generated slides mainImg hide">
+            <img src="data:image/png;base64,{{ obj }}" class="sl-active-color generated slides mainImg hide">
             {% endfor %}
             <img src="{{ url_for('static',filename='images/init_mandala.png') }}" class="slides mainImg hide">
 
