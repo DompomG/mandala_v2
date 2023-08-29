@@ -96,11 +96,11 @@
 
         <div class="btn-wrap" id="arrow-left">
           <img src="{{ url_for('static',filename='images/btn_left.png') }}" class="btn btn-lg btn-outline-primary arrow"
-            onclick="swapImg(1)">
+            onclick="next(1)">
         </div>
         <div class="btn-wrap" id="arrow-right">
           <img src="{{ url_for('static',filename='images/btn_right.png') }}"
-            class="btn btn-lg btn-outline-primary arrow" onclick="swapImg(2)">
+            class="btn btn-lg btn-outline-primary arrow" onclick="next(2)">
         </div>
         <img src="{{ url_for('static',filename='images/fox_bg.png') }}" id="fox-bg-img">
       </div>
@@ -113,7 +113,7 @@
 
 
 
-  <script type="text/javascript" src="../static/scripts.js"></script>
+  <script type="text/javascript" src="../static/script-pattern.js"></script>
 </body>
 
 </html
