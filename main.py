@@ -47,7 +47,7 @@ def pattern():
 @app.route('/generate', methods=['POST', 'GET'])
 def generate():
   id_style = request.form.get('selection')
-  add_prompt_id(0, id_style)  
+  add_prompt_id(1, id_style)  
 
   img = Image.open('static/images/fox_mandala.png')
 
@@ -55,7 +55,7 @@ def generate():
   img.save(data, format='PNG')
   encoded_img_data = base64.b64encode(data.getvalue())
 
-  return render_template('result.html', img_data=encoded_img_data.decode('utf-8'))
+  return render_template('result.html', generated_img=encoded_img_data.decode('utf-8'))
 
 if __name__ == '__main__':
   #app.run()

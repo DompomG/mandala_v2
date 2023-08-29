@@ -1,8 +1,8 @@
 //Params
-var slide_list = document.getElementById("mainImg-wrap");
-var slides = slide_list.getElementsByClassName("slides");
-var item_list = document.getElementById("list");
-var items = item_list.getElementsByClassName("item");
+//var slide_list = document.getElementById("mainImg-wrap");
+var slides = document.getElementsByClassName("slides");
+//var item_list = document.getElementById("list");
+var items = document.getElementsByClassName("item");
 var item_clicked;
 
 var allNum = slides.length;
@@ -30,11 +30,6 @@ for (var i = 0; i < items.length; i++) {
   console.log("Added EventListener: " + i);
 }
 
-//Play
-function play() {
-  slider = setInterval(next, 1500);
-  play_btn.removeEventListener("click", play);
-}
 
 //Stop
 var btn = document.getElementById("stop");
@@ -52,17 +47,23 @@ document.getElementById("list").addEventListener("load", initState());
 //Start Interval
 function start() {
   id = Array.from(this.parentNode.children).indexOf(this) - 1;
-  if (!is_playing) {
-    play_btn.addEventListener("click", play);
-  }
-  is_playing = true;
+  //if (!is_playing) {
+  //  play_btn.addEventListener("click", play);
+  //}
   stop();
-  resetStates(slides);
   activeItem(this);
+  resetStates(slides);
   //Show Initial Image
   slides[id * maxSteps].classList.add("active");
   //Start Interval
   slider = setInterval(next, 1500);
+  is_playing = true;
+}
+
+//Play
+function play() {
+  slider = setInterval(next, 1500);
+  play_btn.removeEventListener("click", play);
 }
 
 //Stop Interval
@@ -81,6 +82,10 @@ function swapClass(elem, name) {
 }
 
 function activeItem(selectedItem) {
+  //Remove Initial Animation
+  for (let i = 0; i < items.length; i++) {
+    items[i].classList.remove("active-border-blinker");
+  }
   //Remove Pre Selected Item Active Status
   var actives = document.getElementsByClassName("item-active");
   if (actives.length > 0) {
@@ -88,10 +93,6 @@ function activeItem(selectedItem) {
       actives[i].classList.remove("item-active");
     }
     selectedItem.classList.remove("darken-state");
-  }
-  for (let i = 0; i < items.length; i++) {
-    let item = items[i];
-    item.classList.remove("active-border-blinker");
   }
   //Set Current Item Active
   selectedItem.classList.add("item-active");
@@ -111,9 +112,6 @@ function activeItem(selectedItem) {
   document.getElementById("submit").type = "submit";
 }
 
-function swapImg(direction) {
-  next(direction);
-}
 
 function next(direction) {
   resetValues;
@@ -143,6 +141,7 @@ function next(direction) {
   swapClass(current, "active");
 }
 
+
 function hideElement(elem) {
   elem = elem.classList;
   if (elem.contains("active")) {
@@ -153,8 +152,8 @@ function hideElement(elem) {
 function resetValues() {
   slide_list = document.getElementById("mainImg-wrap");
   slides = slide_list.getElementsByClassName("slides");
-  item_list = document.getElementById("list");
-  items = item_list.getElementsByClassName("item");
+  //item_list = document.getElementById("list");
+  items = document.getElementsByClassName("item");
   allNum = slides.length;
   slNum = slides.length - 1;
   maxSteps = Math.floor(slNum / items.length);
