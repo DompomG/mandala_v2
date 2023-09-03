@@ -28,7 +28,12 @@ function start() {
     is_playing = true;
 }
 
-
+function rederectResult() {
+    // Erstellen einer XMLHttpRequest-Instanz
+    var xhr = new XMLHttpRequest();
+    // Definieren Sie die Methode (GET oder POST) und die URL Ihrer Flask-Route
+    xhr.open('GET', '/generate', true);
+}
 
 //Play
 function play() {
@@ -37,14 +42,14 @@ function play() {
         slider = setInterval(next, 1500);
         play_btn.removeEventListener("click", play);
     }
-  }
-  
-  //Stop Interval
-  function stop() {
+}
+
+//Stop Interval
+function stop() {
     is_playing = false;
     clearInterval(slider);
     play_btn.addEventListener("click", play);
-  }
+}
 
 function swapClass(elem, name) {
     elem = elem.classList;
@@ -56,7 +61,7 @@ function swapClass(elem, name) {
 }
 
 function swapImg(direction) {
-        next(direction);
+    next(direction);
 }
 
 

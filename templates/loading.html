@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles-result.css') }}" />
+    <title>Mandala Diffusion App</title>
+
+    <style>
+        body {
+            background-color: rgb(236, 236, 236);
+            transition: transform .2s;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{{ url_for('/') }}">
+                <img src="{{ url_for('static',filename='images/logo_small.png') }}" id="logo-icon">
+                <p id="title">Mandala Magic</p>
+            </a>
+        </div>
+    </nav>
+
+    <div class="container" id="main-content">
+        <div class="col-lg order-lg-2 order-first " id="mainImg-wrap">
+            <img src="{{ url_for('static',filename='images/loading.gif') }}" class="slides mainImg active" onload="rederectResult()">
+            <img src="{{ url_for('static',filename='images/fox_bg.png') }}" id="fox-bg-img">
+        </div>
+
+
+        <div id="display">
+            <div class="row">
+                <div id="btn-container">
+                    <button type="button" class="btn btn-lg btn-outline-primary btn-group " id="reset">
+                        <img src="{{ url_for('static',filename='images/icons-reset.png') }}" class="icon">
+                    </button>
+                    <button type="button" class="btn btn-lg btn-outline-primary btn-group" id="stop">
+                        <img src="{{ url_for('static',filename='images/icon-stop.png') }}" class="icon">
+                    </button>
+                    <button type="button" class="btn btn-lg btn-outline-primary btn-group" id="play">
+                        <img src="{{ url_for('static',filename='images/icons-play.png') }}" class="icon">
+                    </button>
+                </div>
+
+                <div id="play-container">
+                    <form action="{{ url_for('pattern') }}" class="btn btn-lg btn-outline-primary" id="start"
+                        method="post">
+                        <input type="hidden" name="select" value="0" id="value">
+                        <button type="reset" id="submit">
+                            <img src="{{ url_for('static',filename='images/icon-submit.png') }}" class="icon">
+                        </button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    </div>
+
+    </div>
+    <div id="footer">
+        <p>© 2023 Dominik Geyer, Inc. All rights reserved.</p>
+    </div>
+
+
+
+    <script type="text/javascript" src="../static/script_result.js"></script>
+</body>
+
+</html
