@@ -28,6 +28,15 @@ play_btn.addEventListener("click", play);
 for (var i = 0; i < items.length; i++) {
     items[i].addEventListener("click", activateItem);
 }
+//Generate(Start) Button
+generate = document.getElementById("start");
+generate.addEventListener("click", showLoadingGif);
+
+function showLoadingGif() {
+    stop();
+    resetStates();
+    document.getElementById("loadingGif").classList.add("active");
+}
 
 //FUNCTION: Activate Item (onClick)
 function activateItem() {

@@ -13,6 +13,10 @@ play_btn.addEventListener("click", play);
 document.getElementById("stop").addEventListener("click", stop);
 
 
+//if (document.getElementsByClassName("generatePage").length > 0) {
+//    redirectResult();
+//}
+
 //Start Interval
 function start() {
     console.log("Run Method: Start!!!!!");
@@ -28,11 +32,15 @@ function start() {
     is_playing = true;
 }
 
-function rederectResult() {
+function redirectResult() {
     // Erstellen einer XMLHttpRequest-Instanz
-    var xhr = new XMLHttpRequest();
+    var request = new XMLHttpRequest();
     // Definieren Sie die Methode (GET oder POST) und die URL Ihrer Flask-Route
-    xhr.open('GET', '/generate', true);
+    console.log("Trying to generate!!!");
+    if (check == false) {
+        request.open('GET', 'generate', true);
+        request.send()
+    }
 }
 
 //Play

@@ -21,7 +21,7 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
         <div class="container-fluid">
-            <a class="navbar-brand" href="{{ url_for('/') }}">
+            <a class="navbar-brand" href="{{ url_for('home') }}">
                 <img src="{{ url_for('static',filename='images/logo_small.png') }}" id="logo-icon">
                 <p id="title">Mandala Magic</p>
             </a>
@@ -30,7 +30,7 @@
 
     <div class="container" id="main-content">
         <div class="col-lg order-lg-2 order-first " id="mainImg-wrap">
-            <img src="{{ url_for('static',filename='images/loading.gif') }}" class="slides mainImg active" onload="rederectResult()">
+            <img src="{{ url_for('static',filename='images/init_mandala.png') }}" class="slides mainImg generatePage active">
             <img src="{{ url_for('static',filename='images/fox_bg.png') }}" id="fox-bg-img">
         </div>
 
@@ -50,7 +50,7 @@
                 </div>
 
                 <div id="play-container">
-                    <form action="{{ url_for('pattern') }}" class="btn btn-lg btn-outline-primary" id="start"
+                    <form action="{{ url_for('results') }}" class="btn btn-lg btn-outline-primary" id="start"
                         method="post">
                         <input type="hidden" name="select" value="0" id="value">
                         <button type="reset" id="submit">

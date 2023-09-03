@@ -2,6 +2,8 @@ from flask import Flask, render_template, request, redirect, url_for
 from PIL import Image
 import base64
 import io
+from time import sleep
+from threading import Thread 
 
 
 # Start flask app
@@ -11,8 +13,10 @@ from prompt_dict import templates, prompt_dict
 
 #Params
 id = 0
+check = 0
 id_style = 0
 prompt = [] 
+generated_images = []
 
 def add_prompt_id(index, elem):
   if (index == 0):
@@ -21,6 +25,8 @@ def add_prompt_id(index, elem):
     while (len(prompt) > 1):
       prompt.pop(0)
   prompt.append(elem)
+
+
 
 slides = ["01_lion.png", "02_owl.png", "03_fox.png", "04_tree1.png", "04_tree2.png", "04_tree3.png"]
 slides2 = ["01_lion.png", "02_owl.png", "03_fox.png", "04_tree1.png", "04_tree2.png", "04_tree3.png", "04_tree1.png", "04_tree2.png", "04_tree3.png"]
@@ -46,16 +52,22 @@ def pattern():
 
 @app.route('/generate', methods=['POST', 'GET'])
 def generate():
-  id_style = request.form.get('selection')
-  add_prompt_id(1, id_style)  
+  sleep(4)
+  if "selection" in request.form: 
+    id_style = request.form.get('selection')
+  else: 
+    id_style = "0"
+  add_prompt_id(1, str(id_style))  
 
-  generated_images = []
+  generated_images.clear()
   for i in range(len(slides3)):
     data = io.BytesIO()
     img = Image.open('static/images/' + slides3[i])
     img.save(data, format='PNG')
     generated_images.append(base64.b64encode(data.getvalue()).decode('utf-8'))
+  #return redirect(url_for("results"))
   return render_template('result.html', generated_img=generated_images)
+
 
 if __name__ == '__main__':
   #app.run()

@@ -21,7 +21,7 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
         <div class="container-fluid">
-            <a class="navbar-brand" href="{{ url_for('/') }}">
+            <a class="navbar-brand" href="{{ url_for('home') }}">
                 <img src="{{ url_for('static',filename='images/logo_small.png') }}" id="logo-icon">
                 <p id="title">Mandala Magic</p>
             </a>
@@ -33,7 +33,8 @@
             {% for obj in generated_img %}
             <img src="data:image/png;base64,{{ obj }}" class="sl-active-color generated slides mainImg hide">
             {% endfor %}
-            <img src="{{ url_for('static',filename='images/init_mandala.png') }}" class="slides mainImg hide">
+            <img src="{{ url_for('static',filename='images/loading.gif') }}" class="slides mainImg hide">
+
 
             <div class="btn-wrap" id="arrow-left">
                 <img src="{{ url_for('static',filename='images/btn_left.png') }}"

@@ -21,7 +21,7 @@
 <body>
   <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
     <div class="container-fluid">
-      <a class="navbar-brand" href="{{ url_for('/') }}">
+      <a class="navbar-brand" href="{{ url_for('home') }}">
         <img src="{{ url_for('static',filename='images/logo_small.png') }}" id="logo-icon">
         <p id="title">Mandala Magic</p>
       </a>
@@ -93,7 +93,8 @@
         <img class="slides mainImg sl-active-color hide" src="{{ url_for('static',filename='images/'+obj) }}">
         {% endfor %}
         <img src="{{ url_for('static',filename='images/'+image_name) }}" class="slides mainImg hide active">
-
+        
+        <img src="{{ url_for('static',filename='images/loading.gif') }}" id="loadingGif" class="mainImg hide">
         <div class="btn-wrap" id="arrow-left">
           <img src="{{ url_for('static',filename='images/btn_left.png') }}" class="btn btn-lg btn-outline-primary arrow"
             onclick="next(1)">
