@@ -26,7 +26,7 @@ slides = ["01_lion.png", "02_owl.png", "03_fox.png", "04_tree1.png", "04_tree2.p
 slides2 = ["01_lion.png", "02_owl.png", "03_fox.png", "04_tree1.png", "04_tree2.png", "04_tree3.png", "04_tree1.png", "04_tree2.png", "04_tree3.png"]
 slides3 = ["01_lion.png", "02_owl.png", "03_fox.png"]
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/', methods=['POST', 'GET'])
 def initial():
   return render_template('index.html', slides=slides)
 

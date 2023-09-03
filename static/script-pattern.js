@@ -16,29 +16,33 @@ var slider = 0;
 var currentSlide = 0;
 var is_playing = false;
 
-
-
+//EVENTLISTENERS:
+//Init Item
 var init = document.getElementById("mainImg-wrap").addEventListener("load", activeItem(0));
+//Stop Button
 document.getElementById("stop").addEventListener("click", stop);
-
+//Play Button
 var play_btn = document.getElementById("play");
 play_btn.addEventListener("click", play);
-
-
-
+//Item List
 for (var i = 0; i < items.length; i++) {
     items[i].addEventListener("click", activateItem);
 }
 
+//FUNCTION: Activate Item (onClick)
 function activateItem() {
     let id = Array.from(this.parentNode.children).indexOf(this) - 1;
-    activeItem(id);
+    index = id;
+    activeIndex = index;
+    //Reset Actives
     resetStates();
+    //Set Active Item
+    activeItem(id);
     //Show Current Image
     slides[id].classList.add("active");
 }
 
-//Start Interval
+//FUNCTION: Start Interval
 function start() {
     resetStates();
     stop();
@@ -51,36 +55,7 @@ function start() {
     is_playing = true;
 }
 
-
-
-function next(direction) {
-    if (direction != null && direction == 1) {
-        //step left
-        index--;
-        index = index < 0 ? slNum : index;
-    } else {
-        //step right
-        index++;
-    }
-
-    //Current Slide
-    activeIndex = index % items.length;
-    var current = slides[activeIndex];
-
-    //Pass Slide Value 
-    document.getElementById("value").value = activeIndex.toString();
-    console.log("Active Image:" + activeIndex + "; Index: " + index);
-
-    //Refresh All Active Slides
-    resetStates();
-    activeItem(activeIndex);
-    //Activate Current Slide
-    swapClass(current, "active");
-}
-
-
-
-
+//FUNCTION: Handle Active Item
 function activeItem(id) {
     selectedItem = document.getElementsByClassName("item")[id];
     //Remove Initial Animation
@@ -115,7 +90,32 @@ function activeItem(id) {
     document.getElementById("value").value = id.toString();
 }
 
+//FUNCTION: Next 
+function next(direction) {
+    if (direction != null && direction == 1) {
+        //step left
+        index--;
+        index = index < 0 ? slNum : index;
+    } else {
+        //step right
+        index++;
+    }
+    //Current Slide
+    activeIndex = index % items.length;
+    var current = slides[activeIndex];
 
+    //Pass Slide Value 
+    document.getElementById("value").value = activeIndex.toString();
+    console.log("Active Image:" + activeIndex + "; Index: " + index);
+
+    //Refresh All Active Slides
+    resetStates();
+    activeItem(activeIndex);
+    //Activate Current Slide
+    swapClass(current, "active");
+}
+
+//FUNCTION: Swapp Class
 function swapClass(elem, name) {
     elem = elem.classList;
     if (elem.contains(name)) {
@@ -125,8 +125,7 @@ function swapClass(elem, name) {
     }
 }
 
-
-//Play
+//FUNCTION: Play
 function play() {
     if (is_playing == false) {
         is_playing = true;
@@ -135,14 +134,14 @@ function play() {
     }
 }
 
-//Stop Interval
+//FUNCTION: Stop Interval
 function stop() {
     is_playing = false;
     clearInterval(slider);
     play_btn.addEventListener("click", play);
 }
 
-
+//FUNCTION: Reset Active Status
 function resetStates() {
     for (i = 0; i < allNum; i++) {
         var curr = slides[i].classList;
