@@ -39,9 +39,9 @@ slides_leafe = ["leafe_00.png", "leafe_01.png", "leafe_02.png"]
 slides_flower = ["flower_00.png", "flower_01.png", "flower_02.png"]
 slides3 = ["00_lion.png", "00_owl.png", "00_fox.png"]
 
-
-#Style
+#List Options
 style_list = ["", "striped ", "twisted "]
+prompt_end = "border, coloring book style, black and white"
 
 #Prompts
 prompt_dict = {
@@ -55,9 +55,7 @@ prompt_dict = {
   5: "circular coloring book emblem with a intricate flower in center, circular ",
 }
 
-#List Options
-style_list = ["", "striped ", "twisted "]
-prompt_end = "border, coloring book style, black and white"
+
 
 @app.route('/', methods=['POST', 'GET'])
 def initial():
@@ -71,8 +69,8 @@ def home():
 @app.route('/pattern', methods=['POST', 'GET'])
 def pattern():
   id = request.form.get('selection')
-  add_prompt_id(0, id)
-  print("Picked Image " + id + ": " + slides[int(id)])
+  add_prompt_id(0, int(id))
+  print("Picked Image with id " + id + ": " + slides[int(id)])
   image_name = slides[int(id)]
   
   # Update slides2 Animals/Nature
@@ -89,7 +87,7 @@ def pattern():
     slides2 = slides_leafe    
   elif prompt[0] == 5:
     slides2 = slides_flower  
-  return render_template("pattern.html", slides=slides2, image_name=image_name, category_id=id)
+  return render_template("pattern.html", slides=slides2, image_name=image_name)
 
 
 @app.route('/generate', methods=['POST', 'GET'])

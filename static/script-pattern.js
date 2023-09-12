@@ -12,6 +12,7 @@ var indexInterval = [0, maxSteps, maxSteps * 2];
 //var id = 0;
 var index = 0;
 var activeIndex = index % items.length;
+console.log("activeIndex: " + activeIndex);
 var idIindex = 0;
 var slider = 0;
 var currentSlide = 0;
@@ -49,7 +50,7 @@ function activateItem() {
     //Set Active Item
     activeItem(id);
     //Show Current Image
-    slides[id].classList.add("active");
+    slides[id%maxSteps].classList.add("active");
     console.log("this id: " + id)
 }
 
@@ -68,8 +69,6 @@ function start() {
 
 //FUNCTION: Handle Active Item
 function activeItem(id) {
-    item_value = document.getElementById("value").value;
-    console.log("item_value: " + item_value + "!!!" + "id: " + id);
     selectedItem = document.getElementsByClassName("item")[id];
     //Remove Initial Animation
     for (let i = 0; i < items.length; i++) {
