@@ -1,4 +1,3 @@
-
 //Params
 var slides = document.getElementsByClassName("slides");
 var items = document.getElementsByClassName("item");
@@ -9,17 +8,19 @@ var slNum = slides.length - 1;
 var maxSteps = Math.floor(slNum / items.length);
 var indexInterval = [0, maxSteps, maxSteps * 2];
 
-//var id = 0;
+var category_id = 1;
 var index = 0;
 var activeIndex = index % items.length;
 var idIindex = 0;
 var slider = 0;
 var currentSlide = 0;
 var is_playing = false;
+var item_id = 0;
 
 //EVENTLISTENERS:
 //Init Item
 var init = document.getElementById("mainImg-wrap").addEventListener("load", activeItem(0));
+
 //Stop Button
 document.getElementById("stop").addEventListener("click", stop);
 //Play Button
@@ -41,16 +42,18 @@ function showLoadingGif() {
 
 //FUNCTION: Activate Item (onClick)
 function activateItem() {
-    let id = Array.from(this.parentNode.children).indexOf(this) - 1;
-    index = id;
+    category_id = document.getElementById("value").value
+
+    item_id = Array.from(this.parentNode.children).indexOf(this) - 1;
+    console.log("Category Id: " + category_id + "!!!!! GOT IT!!!!")
+    index = item_id;
     activeIndex = index;
     //Reset Actives
     resetStates();
     //Set Active Item
-    activeItem(id);
+    activeItem(item_id);
     //Show Current Image
-    slides[id].classList.add("active");
-    console.log("this id: " + id)
+    slides[item_id].classList.add("active");
 }
 
 //FUNCTION: Start Interval
@@ -67,10 +70,12 @@ function start() {
 }
 
 //FUNCTION: Handle Active Item
-function activeItem(id) {
-    item_value = document.getElementById("value").value;
-    console.log("item_value: " + item_value + "!!!" + "id: " + id);
-    selectedItem = document.getElementsByClassName("item")[id];
+function activeItem(selectedItem) {
+    category_id = document.getElementById("value").value
+    console.log("Category_id: " + category_id + "!!");
+    if (selectedItem == null) selectedItem = 0;
+    console.log("curr_active_id: " + selectedItem + "curr item_id: " + item_id + "!!!!!");
+    selectedItem = document.getElementsByClassName("act");
     //Remove Initial Animation
     for (let i = 0; i < items.length; i++) {
         items[i].classList.remove("active-border-blinker");
@@ -84,10 +89,10 @@ function activeItem(id) {
         selectedItem.classList.remove("darken-state");
     }
     //Set Current Item Active
-    selectedItem.classList.add("item-active");
+    items[selectedItem].classList.add("item-active");
     //Darken Other Items
     for (let i = 0; i < items.length; i++) {
-        if (i != id) {
+        if (i != selectedItem) {
             items[i].classList.add("darken-state");
         }
     }
@@ -114,7 +119,8 @@ function next(direction) {
         index++;
     }
     //Current Slide
-    activeIndex = index % items.length;
+    activeIndex = index % items.length + indexInterval[category_id];
+    console.log("activeIndex: " + activeIndex + "; items: " + items.length);
     var current = slides[activeIndex];
 
     //Pass Slide Value 
