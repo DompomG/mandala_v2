@@ -43,6 +43,7 @@ function showLoadingGif() {
 //FUNCTION: Activate Item (onClick)
 function activateItem() {
     let id = Array.from(this.parentNode.children).indexOf(this) - 1;
+    //Update index
     index = id;
     activeIndex = index;
     //Reset Actives
@@ -50,8 +51,9 @@ function activateItem() {
     //Set Active Item
     activeItem(id);
     //Show Current Image
-    slides[id%maxSteps].classList.add("active");
-    console.log("this id: " + id)
+    //slides[id].classList.add("active");
+    swapClass(slides[id], "active");
+    console.log("Activate Slide: " + id)
 }
 
 //FUNCTION: Start Interval
@@ -69,7 +71,9 @@ function start() {
 
 //FUNCTION: Handle Active Item
 function activeItem(id) {
+    if (id == null || id == undefined) id = 0
     selectedItem = document.getElementsByClassName("item")[id];
+    //selectedItem = Array.from(document.getElementById("list").children).indexOf(id)-1;
     //Remove Initial Animation
     for (let i = 0; i < items.length; i++) {
         items[i].classList.remove("active-border-blinker");
