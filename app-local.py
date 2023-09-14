@@ -9,8 +9,6 @@ from threading import Thread
 # Start flask app
 app = Flask(__name__)
 
-from prompt_dict import templates, prompt_dict
-
 #Params
 id = 0
 check = 0
